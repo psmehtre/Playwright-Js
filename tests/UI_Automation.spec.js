@@ -15,6 +15,7 @@ test.describe.serial('Keygen UI Automation', () => {
         page = await browser.newPage();
         await page.goto(baseUrl + '/login'); // Go to login page 
 
+        //login function
         await page.locator("//input[@id='account']").fill('uniacco-com');
         await page.locator("//input[@id='email']").fill('priyadarshan.m@uniacco.com');
         await page.locator("//input[@id='password']").fill('darshan@123');
@@ -31,6 +32,7 @@ test.describe.serial('Keygen UI Automation', () => {
     
 
     test('UI Automation login', async () => {
+        //verify able to dashboard after successful login
         await expect(page).toHaveURL(baseUrl);
         console.log('✅ Login successful');
     });
@@ -49,17 +51,18 @@ test.describe.serial('Keygen UI Automation', () => {
         // Navigate to the create product page
         await page.locator("//a[normalize-space()='New Product']").click();
         await expect(page).toHaveURL(baseUrl + '/products/new');
-
+        
+        //Fill the form with valid inputs
         await page.locator("//input[@id='name']").fill('Test Product 001');
         await page.locator("//input[@id='code']").fill(uniqueCode);
         await page.locator("//input[@id='url']").fill('https://google.com');
         await page.locator("//select[@id='distributionStrategy']").selectOption('OPEN');
         await page.locator("//button[normalize-space()='Submit']").click();
-
+        
+        //assertions to verify product got created
         await expect(page.locator("//h1[@class='header']")).toContainText('show');
         await expect(page).toHaveURL(/https:\/\/app\.keygen\.sh\/products\/[a-zA-Z0-9]+/);
         await page.waitForTimeout(3000)
-
         await page.getByRole('link', { name: 'Products' }).click();
         await expect(page.getByRole('link', { name: uniqueCode })).toBeVisible();
 
@@ -68,7 +71,7 @@ test.describe.serial('Keygen UI Automation', () => {
 
     // Edit Product
     test('Edit Product', async () => {
-        
+        //Edit the created product
         await page.getByRole('link', { name: 'Products' }).click();
         await page.getByRole('link', { name: uniqueCode }).click();
         await page.getByRole('link', { name: 'Edit', exact: true }).click();
@@ -77,6 +80,7 @@ test.describe.serial('Keygen UI Automation', () => {
         await page.getByRole('button', { name: 'Submit' }).click();
         await page.waitForTimeout(3000)
 
+        //assertion to validate edit done successfully
         await expect(page).toHaveURL(/https:\/\/app\.keygen\.sh\/products\/[a-zA-Z0-9]+/);
         console.log('✅ Product updated successfully');
     });
@@ -104,10 +108,11 @@ test.describe.serial('Keygen UI Automation', () => {
 
     // Create User
     test('Create User', async () => {
+        //goto create user page
         await page.goto(baseUrl + '/users/new');
-
         await page.waitForTimeout(3000)
 
+        //Fill the form with valid inputs
         await page.getByPlaceholder('First Name').fill('test');
         await page.getByPlaceholder('Last Name').fill('tester');
         await page.getByPlaceholder('Email').fill('test@gmail.com');
@@ -119,6 +124,7 @@ test.describe.serial('Keygen UI Automation', () => {
         await page.getByRole('button', { name: 'Submit' }).click();
         await page.waitForTimeout(5000)
 
+        //assertoins to verify user is added
         await expect(page.getByText('ID', { exact: true })).toBeVisible();
         await expect(page).toHaveURL(/https:\/\/app\.keygen\.sh\/users\/[a-zA-Z0-9]+/);
         console.log('✅ User created successfully');
@@ -128,6 +134,7 @@ test.describe.serial('Keygen UI Automation', () => {
     test('Edit User', async () => {
         await page.goto(baseUrl + '/users');
 
+        //goto the users page list & verify on the same entry of created
         await page.getByRole('link', { name: 'test@gmail.com' }).click();
         await page.getByRole('link', { name: 'Edit', exact: true }).click();
         await page.getByPlaceholder('Last Name').click();
