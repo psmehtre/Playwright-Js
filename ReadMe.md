@@ -38,3 +38,26 @@ Before running the tests, ensure you have the following installed:
    ```bash
    git clone <git@github.com:psmehtre/Playwright-PracticeJs.git>
    cd <your-repository-directory>
+
+
+## Reporting & Observations
+1. Test execution results are captured in the console output.
+2. Screenshots can be taken during UI execution by uncommenting:
+3. `await page.screenshot({ path: 'screenshot.png' });`
+4. Logs and reports are available in the test-results/ directory after execution.
+
+
+## Running the Tests 
+1. API Tests
+   To execute API test cases, run:
+   `npx playwright test tests/backendApiAutomation.spec.js --headed` (using --headed it will get execute in browser, as by default playwright executes script in headless mode)
+2. UI Tests
+   To execute UI test cases, run:
+   `npx playwright test tests/UI_Automation.spec.js --headed`
+3. To run all tests:
+   `npx playwright test`
+4. Command to Record & Generate Code
+   `npx playwright codegen <URL>`
+   
+
+
