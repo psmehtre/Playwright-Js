@@ -3,9 +3,9 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
 
-const API_BASE_URL = 'https://api.keygen.sh/v1/accounts';
-const ACCOUNT_ID = '3f501237-ca8f-40c0-a7b6-ba9059b2f30a';
-const API_KEY = 'admin-e79f6f54c3ea5a8cfac59d05e2091536d27828949ca97a6abbcf974a144792c5v3';
+const API_BASE_URL = process.env.API_BASE_URL;
+const API_KEY = process.env.API_KEY;
+const ACCOUNT_ID= process.env.ACCOUNT_ID;
 
 const headers = {
   'Accept': 'application/vnd.api+json',
