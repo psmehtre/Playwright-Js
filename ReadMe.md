@@ -39,6 +39,10 @@ Before running the tests, ensure you have the following installed:
    git clone <git@github.com:psmehtre/Playwright-PracticeJs.git>
    cd <your-repository-directory>
 
+## Environment Variables
+1. API_BASE_URL: The base URL for the Keygen platform (default is https://app.keygen.sh).
+2. USERNAME: Your Keygen account email/username.
+3. PASSWORD: Your Keygen account password.
 
 ## Reporting & Observations
 1. Test execution results are captured in the console output.
